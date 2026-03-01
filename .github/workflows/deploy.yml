@@ -29,7 +29,8 @@ jobs:
 
       - name: build, tag, and push to ecr
         run: |
-          IMAGE_URI=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO_NAME}TAG=${GITHUB_SHA}
+          IMAGE_URI=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO_NAME}
+          TAG=${{github.sha}}
           docker build -t ${REPO_NAME}:${TAG} .
           docker tag ${REPO_NAME}:${TAG} ${IMAGE_URI}:${TAG}
           docker push ${IMAGE_URI}:${TAG}
